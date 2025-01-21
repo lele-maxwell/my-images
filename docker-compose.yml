@@ -1,0 +1,16 @@
+version: '3'
+services:
+  postgres1:
+    image: my-postgres-image
+    environment:
+      - POSTGRES_PASSWORD=my_password
+    container_name: my-postgres-dc-container1
+
+  postgres2:
+    image: my-postgres-image
+    environment:
+      - POSTGRES_PASSWORD=my_password
+    container_name: my-postgres-dc-container2
+
+
+
