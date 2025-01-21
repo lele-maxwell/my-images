@@ -19,21 +19,21 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
-        username: ${{ github.lele-maxwell }}
+        username: ${{ github.actor }}
         password: ${{ secrets.TOKEN }}
 
     # Step 3: Build the Docker image
     - name: Build Docker image
       run: |
-        docker build -t ghcr.io/${{ github.lele-maxwell}}/my-image:latest .
+        docker build -t ghcr.io/${{ github.repository_owner }}/my-image:latest .
 
     # Step 4: Slim the Docker image
     - name: Optimize Docker image
       run: |
         docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-          docker-slim/docker-slim build --tag ghcr.io/${{ github.lele-maxwell }}/my-image:slim .
+          docker-slim/docker-slim build --tag ghcr.io/${{ github.repository_owner }}/my-image:slim .
 
     # Step 5: Push the slimmed image to GitHub Container Registry
     - name: Push slim Docker image
       run: |
-        docker push ghcr.io/${{ github.lele-maxwell }}/my-image:slim
+        docker push ghcr.io/${{ github.repository_owner }}/my-image:slim
