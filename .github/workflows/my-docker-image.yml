@@ -37,8 +37,12 @@ jobs:
     - name: Optimize Docker image
       run: |
         ./dist_linux/docker-slim build --tag ghcr.io/${{ github.repository_owner }}/my-image:slim 
+   # Step 5: tag the slimed image
+    - name: tag slimed
+      run: |
+        docker tag ghcr.io/${{ github.repository_owner }}/my-image:latest ghcr.io/${{ github.repository_owner }}/my-image:slim
 
-    # Step 5: Push the slimmed image to GitHub Container Registry
+    # Step 6: Push the slimmed image to GitHub Container Registry
     - name: Push slim Docker image
       run: |
         docker push ghcr.io/${{ github.repository_owner }}/my-image:slim
