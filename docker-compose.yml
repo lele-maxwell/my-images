@@ -1,16 +1,17 @@
-version: '3'
+
 services:
   postgres1:
+    build:
+      context: . 
     image: my-image
     environment:
-      - POSTGRES_PASSWORD=my_password
+      POSTGRES_PASSWORD: my_password
     container_name: my-postgres-dc-container1
+    ports:
+      - "5432:5432"  # Map container's port 5432 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist data 
 
-  postgres2:
-    image: my-image
-    environment:
-      - POSTGRES_PASSWORD=my_password
-    container_name: my-postgres-dc-container2
-
-
+volumes:
+  postgres_data:
 
