@@ -27,13 +27,13 @@ jobs:
       run: |
         docker build -t ghcr.io/${{ github.repository_owner }}/my-image:latest .
 
-    # Step 4: Install Docker Slim
+    # Step 4: Download and Install Docker Slim
     - name: Install Docker Slim
       run: |
         curl -L -o docker-slim.tar.gz https://github.com/slimtoolkit/slim/releases/download/1.40.11/dist_linux.tar.gz
         tar -xzf docker-slim.tar.gz
         chmod +x dist_linux/docker-slim
-        sudo mv dist_linux/docker-slim /usr/local/bin/
+        sudo mv dist_linux/docker-slim /usr/local/bin/docker-slim
 
     # Step 5: Slim the Docker image
     - name: Slim Docker image
