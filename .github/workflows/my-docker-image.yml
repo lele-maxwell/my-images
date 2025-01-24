@@ -27,28 +27,16 @@ jobs:
       run: |
         docker build -t ghcr.io/${{ github.repository_owner }}/my-image:latest .
 
-    # Step 4: Download and Install Docker Slim
-    - name: Install Docker Slim
-      run: |
-        curl -L -o docker-slim.tar.gz https://github.com/slimtoolkit/slim/releases/download/1.40.11/dist_linux.tar.gz
-        tar -xzf docker-slim.tar.gz
-        chmod +x dist_linux/docker-slim
-        sudo mv dist_linux/docker-slim /usr/local/bin/docker-slim
-
-    # Step 5: Slim the Docker image
+    # Step 4: Slim the Docker image using Kitabisa Action
     - name: Slim Docker image
-      run: |
-        docker-slim build \
-          --http-probe=false \
-          --continue-after=nothing \
-          ghcr.io/${{ github.repository_owner }}/my-image:latest
+      uses: kitabisa/docker-slim-action@v1
+      env:
+        DSLIM_HTTP_PROBE: "false"  # Disables HTTP probing during slimming
+      with:
+        target: ghcr.io/${{ github.repository_owner }}/my-image:latest  # Target image to slim
+        tag: slim  # Suffix for the slimmed image tag
 
-    # Step 6: Tag the slimmed image
-    - name: Tag slimmed image
-      run: |
-        docker tag ghcr.io/${{ github.repository_owner }}/my-image.slim ghcr.io/${{ github.repository_owner }}/my-image:slim
-
-    # Step 7: Push the slimmed image to GitHub Container Registry
-    - name: Push slim Docker image
+    # Step 5: Push the slimmed image to GitHub Container Registry
+    - name: Push slimmed Docker image
       run: |
         docker push ghcr.io/${{ github.repository_owner }}/my-image:slim
