@@ -21,3 +21,5 @@ To use this image, follow these steps:
 Build and Push Workflow
 
 The Docker image is built and pushed to the GitHub Container Registry using a GitHub Actions workflow. The workflow is triggered on push to the main branch and on a scheduled basis.
+
+
