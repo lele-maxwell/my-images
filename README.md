@@ -1,7 +1,7 @@
  README
 
 ===============
-Introduction
+## Introduction:
 
 This project provides a pre-built Docker image with a populated database containing feedback data for a social media platform. The image includes a query table that displays posts with the highest number of reactions, along with additional information such as post ID, content, and reaction counts.
 Features
